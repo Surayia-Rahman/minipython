@@ -92,3 +92,43 @@ The model is trained using a dataset that mimics a noisy sine wave, and after tr
 The result is visualized with a plot showing both the actual noisy data and the regression line fitted by the model.
 
 In conclusion, this code showcases the use of a neural network for regression to approximate a non-linear function, and its effectiveness can be evaluated by the accuracy of the fitted line compared to the true underlying function (sine wave).
+
+Using this notion, the sample stock price dataset analysis can be referred to.
+
+The quiz game is just for fun :)
+
+     The last one would be using scapy on a surface level for a little bit of experiment. 
+
+This script performs a network scan to discover devices connected to a local network and retrieves information about those devices, including their IP address, MAC address, and vendor name. Here's a breakdown of how it works:
+
+1. get_vendor(mac_address) function:
+This function takes a MAC address as input and uses an external API (macvendors.com) to retrieve the vendor name associated with that MAC address.
+
+It sends an HTTP GET request to the https://api.macvendors.com/{mac_address} endpoint and returns the vendor name if the request is successful (HTTP status 200).
+
+If an error occurs (e.g., the API is unavailable or the request fails), the function returns "Unknown".
+
+2. scan_network(target_ip_range, timeout) function:
+This function scans the local network for devices by sending ARP (Address Resolution Protocol) requests to the specified IP range.
+
+The IP range to scan is provided in CIDR notation (default is "192.168.100.1/24", which means it scans all IP addresses in the 192.168.100.1 - 192.168.100.254 range).
+
+ARP is used to map IP addresses to MAC addresses. The function sends an ARP request for each device in the IP range, and the devices that are active on the network will respond with their MAC addresses.
+
+The srp function from the Scapy library is used to send and receive ARP packets, with a specified timeout (timeout=2 seconds).
+
+After receiving the responses, the function calls the get_vendor function to fetch the vendor name for each MAC address and stores the results in a list of dictionaries. Each dictionary contains the following information:
+
+a. IP address of the device (received.psrc)
+
+b. MAC address of the device (received.hwsrc)
+
+c. Vendor name retrieved using the get_vendor function
+
+3. Example usage:
+   
+The script then calls scan_network() to perform the scan and prints the results.
+
+It outputs the discovered devices in a tabular format, listing each device's IP address, MAC address, and vendor name (if available).
+
+
